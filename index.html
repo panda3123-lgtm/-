@@ -2,10 +2,47 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>オリジナールカードゲーム</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>オリジナールカードゲーム</h1>
-    <p>ようこそ！</p>
+
+<div id="game">
+
+    <div class="status enemy">
+        <span>相手 LP：8000</span>
+        <span>コスト：2/2</span>
+    </div>
+
+    <div class="field enemy-field">
+        相手モンスターエリア
+    </div>
+
+    <div class="field enemy-spell">
+        相手魔法・トラップエリア
+    </div>
+
+    <div class="field player-spell">
+        自分魔法・トラップエリア
+    </div>
+
+    <div class="field player-field">
+        自分モンスターエリア
+    </div>
+
+    <div class="hand">
+        手札
+    </div>
+
+    <div class="status player">
+        <span>LP：8000</span>
+        <span>コスト：1/1</span>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+
 </body>
 </html>
