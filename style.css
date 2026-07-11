@@ -1,81 +1,129 @@
 body{
-    margin:0;
-    background:#1f4b2c;
-    color:white;
-    font-family:sans-serif;
+
+margin:0;
+
+background:#1f4b2c;
+
+color:white;
+
+font-family:sans-serif;
+
 }
+
+
 
 #game{
-    width:100%;
-    height:100vh;
 
-    display:flex;
-    flex-direction:column;
+width:100%;
+
+height:100vh;
+
+display:flex;
+
+flex-direction:column;
+
 }
+
+
 
 .status{
-    display:flex;
-    justify-content:space-between;
 
-    background:#222;
+background:#222;
 
-    padding:10px;
+padding:10px;
 
-    font-size:20px;
+font-size:20px;
+
+display:flex;
+
+justify-content:space-between;
+
 }
+
+
 
 .field{
-    flex:1;
 
-    border:1px solid white;
+flex:1;
 
-    display:flex;
+border:1px solid white;
 
-    justify-content:center;
+display:flex;
 
-    align-items:center;
+justify-content:center;
+
+align-items:center;
+
+flex-wrap:wrap;
+
+overflow:auto;
+
 }
+
+
 
 .hand{
 
-    height:120px;
+height:170px;
 
-    border-top:2px solid white;
+border-top:2px solid white;
 
-    display:flex;
+display:flex;
 
-    justify-content:center;
+justify-content:center;
 
-    align-items:center;
+align-items:center;
+
 }
+
+
 
 .card{
 
-    width:110px;
-    height:150px;
+width:110px;
 
-    background:white;
+height:150px;
 
-    color:black;
+background:white;
 
-    border-radius:10px;
+color:black;
 
-    margin:5px;
+border-radius:10px;
 
-    padding:5px;
+margin:5px;
 
-    box-sizing:border-box;
+padding:5px;
 
-    display:flex;
+box-sizing:border-box;
 
-    justify-content:center;
+display:flex;
 
-    align-items:center;
+justify-content:center;
 
-    text-align:center;
+align-items:center;
 
-    flex-direction:column;
+text-align:center;
 
-    font-size:14px;
+flex-direction:column;
+
+}
+
+
+
+.card:hover{
+
+transform:scale(1.05);
+
+cursor:pointer;
+
+}
+
+
+
+button{
+
+font-size:16px;
+
+padding:5px;
 
 }
