@@ -10,74 +10,80 @@
 
 <body>
 
-
 <div id="game">
 
 
-<!-- 相手情報 -->
-<div class="status enemy">
+<div class="status">
 
-<span>
+<div>
 相手LP：
 <span id="enemyLP">8000</span>
-</span>
+</div>
 
-<span>
+<div>
 相手コスト：
 <span id="enemyCost">2</span>
-</span>
+</div>
 
 </div>
 
 
 
-<!-- 相手モンスター -->
 <div class="field" id="enemy-field">
 相手モンスターエリア
 </div>
 
 
 
-<!-- 相手魔法罠 -->
 <div class="field" id="enemy-spell">
 相手魔法・トラップエリア
 </div>
 
 
 
-<!-- 自分魔法罠 -->
-<div class="field" id="player-spell">
-自分魔法・トラップエリア
+<div class="field" id="grave">
+
+墓地
+
 </div>
 
 
 
-<!-- 自分モンスター -->
 <div class="field" id="player-field">
+
 自分モンスターエリア
+
 </div>
 
 
 
-<!-- 手札 -->
+<div class="field" id="player-spell">
+
+自分魔法・トラップエリア
+
+</div>
+
+
+
 <div class="hand" id="hand">
+
 </div>
 
 
 
-<!-- 自分情報 -->
-<div class="status player">
+<div class="status">
 
-<span>
+
+<div>
 自分LP：
 <span id="playerLP">8000</span>
-</span>
+</div>
 
 
-<span>
-自分コスト：
+<div>
+コスト：
 <span id="cost">1</span>
-</span>
+</div>
 
 
 <button onclick="endTurn()">
@@ -93,7 +99,6 @@
 
 
 <script src="script.js"></script>
-
 
 </body>
 
