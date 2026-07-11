@@ -1,3 +1,5 @@
+alert("script動いてる");
+
 let allCards = [];
 
 let deck = [];
