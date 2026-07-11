@@ -1,403 +1,140 @@
-let playerLP = 8000;
+let cards = [];
 
-let enemyLP = 8000;
+let hand = [];
 
-
-//コスト
 let cost = 1;
 
 
-//ターン
-let turn = 1;
+// cards.json読み込み
 
+fetch("cards.json")
+.then(response => response.json())
+.then(data => {
 
-//デッキ
-let deck=[];
+    cards = data;
 
+    // 仮の初期手札5枚
+    hand = cards.slice(0,5);
 
-//手札
-let hand=[];
-
-
-//場
-let field=[];
-
-
-//墓地
-let grave=[];
-
-
-
-
-
-//カード作成
-
-function createDeck(){
-
-let cards=[
-
-...
-
-];
-
-}
-
-
-
-for(let i=0;i<10;i++){
-
-cards.forEach(card=>{
-
-deck.push(
-{
-...card,
-summoned:false,
-attacked:false
-}
-);
-
+    showHand();
 
 });
 
 
-}
 
-
-}
-
-
-
-
-
-
-
-//初期化
-
-createDeck();
-
-
-
-for(let i=0;i<5;i++){
-
-draw();
-
-}
-
-
-
-update();
-
-
-
-
-
-
-
-
-//ドロー
-
-function draw(){
-
-
-if(deck.length>0){
-
-let n=Math.floor(
-Math.random()*deck.length
-);
-
-
-hand.push(deck.splice(n,1)[0]);
-
-
-}
-
-
-}
-
-
-
-
-
-
-
-
-//手札表示
+// 手札表示
 
 function showHand(){
 
+    const handDiv = document.getElementById("hand");
 
-let area=
-document.getElementById("hand");
-
-
-area.innerHTML="";
+    handDiv.innerHTML = "";
 
 
-
-hand.forEach((card,index)=>{
-
-
-let div=document.createElement("div");
+    hand.forEach((card,index)=>{
 
 
-div.className="card";
+        const div = document.createElement("div");
+
+        div.className = "card";
 
 
-div.innerHTML=
-
-`
-<b>${card.name}</b>
-<br>
-コスト:${card.cost}
-<br>
-ATK:${card.atk}
-`;
+        div.innerHTML = `
+        <b>${card.name}</b>
+        <br>
+        コスト:${card.cost}
+        <br>
+        ATK:${card.atk}
+        `;
 
 
+        div.onclick = ()=>{
 
-div.onclick=()=>useCard(index);
+            playCard(index);
+
+        };
 
 
+        handDiv.appendChild(div);
 
-area.appendChild(div);
 
-
-});
-
+    });
 
 }
 
 
 
+// カード使用
+
+function playCard(index){
+
+
+    const card = hand[index];
+
+
+    if(card.cost > cost){
+
+        alert("コスト不足！");
+
+        return;
+
+    }
 
 
 
+    // コスト消費
 
-//カード使用
-
-function useCard(index){
-
+    cost -= card.cost;
 
 
-let card=hand[index];
+    document.getElementById("cost").innerText = cost;
 
 
 
-if(cost < card.cost){
+    // モンスターなら召喚
 
-alert("コスト不足");
+    if(card.type === "monster"){
 
-return;
+        summon(card);
 
-}
-
-
-
-cost-=card.cost;
+    }
 
 
+    // 手札から削除
 
-hand.splice(index,1);
-
-
-
-if(card.type==="monster"){
+    hand.splice(index,1);
 
 
-card.summoned=true;
-
-
-field.push(card);
-
-
-}
-
-
-update();
-
+    showHand();
 
 }
 
 
 
+// 召喚
 
+function summon(card){
 
 
+    const field =
+    document.getElementById("player-field");
 
 
-//場表示
+    const div =
+    document.createElement("div");
 
-function showField(){
 
+    div.className="card";
 
-let area=
-document.getElementById("player-field");
 
+    div.innerHTML=
+    `
+    <b>${card.name}</b>
+    <br>
+    ATK:${card.atk}
+    `;
 
-area.innerHTML="";
 
-
-
-field.forEach(card=>{
-
-
-let div=document.createElement("div");
-
-
-div.className="card";
-
-
-div.innerHTML=
-
-`
-<b>${card.name}</b>
-<br>
-ATK:${card.atk}
-<br>
-
-${card.summoned&&!card.SA?
-"召喚酔い":
-"攻撃可能"}
-
-<button onclick="attack(${card.atk},this)">
-攻撃
-</button>
-
-`;
-
-
-
-area.appendChild(div);
-
-
-});
-
-
-}
-
-
-
-
-
-
-
-
-//攻撃
-
-function attack(atk,btn){
-
-
-let card=field.find(
-c=>c.atk===atk
-);
-
-
-
-if(card && card.summoned&&!card.SA){
-
-alert("召喚したターンは攻撃できません");
-
-return;
-
-}
-
-
-
-if(card.attacked){
-
-alert("攻撃済み");
-
-return;
-
-}
-
-
-
-enemyLP-=atk;
-
-
-card.attacked=true;
-
-
-
-update();
-
-
-
-}
-
-
-
-
-
-
-
-//ターン終了
-
-function endTurn(){
-
-
-turn++;
-
-
-cost+=2;
-
-
-if(cost>10){
-
-cost=10;
-
-}
-
-
-
-//攻撃リセット
-
-field.forEach(card=>{
-
-
-card.attacked=false;
-
-
-card.summoned=false;
-
-
-});
-
-
-
-draw();
-
-
-
-update();
-
-
-}
-
-
-
-
-
-
-
-
-function update(){
-
-
-document.getElementById("playerLP").innerText=playerLP;
-
-
-document.getElementById("enemyLP").innerText=enemyLP;
-
-
-document.getElementById("cost").innerText=cost;
-
-
-showHand();
-
-
-showField();
-
+    field.appendChild(div);
 
 }
