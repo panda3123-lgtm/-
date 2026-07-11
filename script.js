@@ -1,4 +1,4 @@
-alert("script動いてる");
+
 
 let allCards = [];
 
@@ -328,3 +328,5 @@ function endTurn(){
 
 
 }
+
+alert(allCards.length);
