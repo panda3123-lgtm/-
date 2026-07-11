@@ -34,47 +34,13 @@ let grave=[];
 
 function createDeck(){
 
-
 let cards=[
 
-{
-name:"一般兵士",
-type:"monster",
-cost:4,
-atk:1600
-},
-
-{
-name:"ネズミ3.57864",
-type:"monster",
-cost:1,
-atk:500,
-SA:true
-},
-
-{
-name:"クトゥルフ",
-type:"monster",
-cost:10,
-atk:3500
-},
-
-{
-name:"魔女",
-type:"monster",
-cost:3,
-atk:1300
-},
-
-{
-name:"マネネ",
-type:"monster",
-cost:4,
-atk:1500
-}
-
+...
 
 ];
+
+}
 
 
 
