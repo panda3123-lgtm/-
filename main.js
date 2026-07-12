@@ -77,6 +77,11 @@ function loadCards(){
     list.innerHTML="";
 
 
+    if(typeof cards === 'undefined'){
+        console.error("cards is not defined");
+        return;
+    }
+
 
     cards.forEach(card=>{
 
@@ -341,21 +346,11 @@ function saveDeck(){
 
 
 // =================================
-// 起動処理
+// ボタン処理
 // =================================
 
 
-window.onload=function(){
-
-
-    showScreen(
-    "titleScreen"
-    );
-
-
-    // =================================
-    // ボタン処理
-    // =================================
+function setupButtons(){
 
     document
     .querySelectorAll("button")
@@ -500,5 +495,23 @@ window.onload=function(){
 
     });
 
+}
+
+
+
+
+// =================================
+// 起動処理
+// =================================
+
+
+window.onload=function(){
+
+
+    showScreen(
+    "titleScreen"
+    );
+
+    setupButtons();
 
 };
