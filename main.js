@@ -29,9 +29,7 @@ let gameData = {
 
 
 
-
 let currentCard = null;
-
 
 
 
@@ -61,161 +59,6 @@ function showScreen(id){
 
 
 
-
-
-// =================================
-// ボタン処理
-// =================================
-
-
-document
-.querySelectorAll("button")
-.forEach(button=>{
-
-
-button.addEventListener(
-"click",
-()=>{
-
-
-let action =
-button.dataset.action;
-
-
-
-switch(action){
-
-
-case "start":
-
-showScreen(
-"menuScreen"
-);
-
-break;
-
-
-
-
-case "battle":
-
-showScreen(
-"battleScreen"
-);
-
-break;
-
-
-
-
-case "deck":
-
-showScreen(
-"deckScreen"
-);
-
-break;
-
-
-
-
-case "cards":
-
-showScreen(
-"cardScreen"
-);
-
-loadCards();
-
-break;
-
-
-
-
-case "setting":
-
-showScreen(
-"settingScreen"
-);
-
-break;
-
-
-
-
-case "menu":
-
-showScreen(
-"menuScreen"
-);
-
-break;
-
-
-
-
-case "title":
-
-showScreen(
-"titleScreen"
-);
-
-break;
-
-
-
-
-case "addDeck":
-
-addDeckCard(
-currentCard
-);
-
-break;
-
-
-
-
-case "endTurn":
-
-endTurn();
-
-break;
-
-
-
-case "saveDeck":
-
-saveDeck();
-
-break;
-
-
-
-case "exit":
-
-alert(
-"終了してください"
-);
-
-break;
-
-
-
-}
-
-
-
-});
-
-
-});
-
-
-
-
-
-
 // =================================
 // カード一覧
 // =================================
@@ -224,75 +67,72 @@ break;
 function loadCards(){
 
 
-let list = 
-document.getElementById(
-"cardList"
-);
+    let list = 
+    document.getElementById(
+    "cardList"
+    );
 
 
 
-list.innerHTML="";
+    list.innerHTML="";
 
 
 
-cards.forEach(card=>{
+    cards.forEach(card=>{
 
 
-let div =
-document.createElement(
-"div"
-);
-
-
-
-div.className="card";
+        let div =
+        document.createElement(
+        "div"
+        );
 
 
 
-div.innerHTML=`
-
-<img src="${card.image}">
-
-
-<h3>
-${card.name}
-</h3>
-
-
-<p>
-コスト ${card.cost}
-</p>
-
-
-<p>
-ATK ${card.atk ?? "-"}
-</p>
-
-`;
+        div.className="card";
 
 
 
-div.onclick=()=>{
+        div.innerHTML=`
+
+        <img src="${card.image}">
 
 
-showDetail(card);
+        <h3>
+        ${card.name}
+        </h3>
 
 
-};
+        <p>
+        コスト ${card.cost}
+        </p>
+
+
+        <p>
+        ATK ${card.atk ?? "-"}
+        </p>
+
+        `;
 
 
 
-list.appendChild(div);
+        div.onclick=()=>{
+
+
+            showDetail(card);
+
+
+        };
 
 
 
-});
+        list.appendChild(div);
 
+
+
+    });
 
 
 }
-
-
 
 
 
@@ -305,71 +145,69 @@ list.appendChild(div);
 function showDetail(card){
 
 
-currentCard=card;
+    currentCard=card;
 
 
 
-showScreen(
-"detailScreen"
-);
+    showScreen(
+    "detailScreen"
+    );
 
 
 
-document
-.getElementById(
-"detailImage"
-)
-.src =
-card.image;
+    document
+    .getElementById(
+    "detailImage"
+    )
+    .src =
+    card.image;
 
 
 
-document
-.getElementById(
-"detailName"
-)
-.textContent =
-card.name;
+    document
+    .getElementById(
+    "detailName"
+    )
+    .textContent =
+    card.name;
 
 
 
-document
-.getElementById(
-"detailCost"
-)
-.textContent =
+    document
+    .getElementById(
+    "detailCost"
+    )
+    .textContent =
 
-"コスト : "
-+
-card.cost;
-
-
-
-document
-.getElementById(
-"detailAtk"
-)
-.textContent =
-
-"ATK : "
-+
-(card.atk ?? "-");
+    "コスト : "
+    +
+    card.cost;
 
 
 
-document
-.getElementById(
-"detailText"
-)
-.textContent =
+    document
+    .getElementById(
+    "detailAtk"
+    )
+    .textContent =
 
-card.text;
+    "ATK : "
+    +
+    (card.atk ?? "-");
+
+
+
+    document
+    .getElementById(
+    "detailText"
+    )
+    .textContent =
+
+    card.text;
 
 
 
 }
-
-
 
 
 
@@ -382,34 +220,33 @@ card.text;
 function addDeckCard(card){
 
 
-if(
-gameData.deck.length>=60
-){
+    if(
+    gameData.deck.length>=60
+    ){
 
-alert(
-"デッキ枚数上限です"
-);
+        alert(
+        "デッキ枚数上限です"
+        );
 
-return;
+        return;
+
+    }
+
+
+
+    gameData.deck.push(card);
+
+
+
+    updateDeck();
+
+
+    alert(
+    card.name+"を追加しました"
+    );
+
 
 }
-
-
-
-gameData.deck.push(card);
-
-
-
-updateDeck();
-
-
-alert(
-card.name+"を追加しました"
-);
-
-
-}
-
 
 
 
@@ -417,19 +254,17 @@ card.name+"を追加しました"
 function updateDeck(){
 
 
-document
-.getElementById(
-"deckCount"
-)
-.textContent =
+    document
+    .getElementById(
+    "deckCount"
+    )
+    .textContent =
 
-gameData.deck.length;
+    gameData.deck.length;
 
 
 
 }
-
-
 
 
 
@@ -442,37 +277,35 @@ gameData.deck.length;
 function endTurn(){
 
 
-gameData.cost +=2;
+    gameData.cost +=2;
 
 
 
-if(
-gameData.cost>10
-){
+    if(
+    gameData.cost>10
+    ){
 
-gameData.cost=10;
+        gameData.cost=10;
+
+    }
+
+
+
+    document
+    .getElementById(
+    "cost"
+    )
+    .textContent =
+    gameData.cost;
+
+
+
+    alert(
+    "ターン終了"
+    );
+
 
 }
-
-
-
-document
-.getElementById(
-"cost"
-)
-.textContent =
-gameData.cost;
-
-
-
-alert(
-"ターン終了"
-);
-
-
-}
-
-
 
 
 
@@ -485,26 +318,24 @@ alert(
 function saveDeck(){
 
 
-localStorage.setItem(
+    localStorage.setItem(
 
-"deck",
+    "deck",
 
-JSON.stringify(
-gameData.deck
-)
+    JSON.stringify(
+    gameData.deck
+    )
 
-);
+    );
 
 
 
-alert(
-"保存しました"
-);
+    alert(
+    "保存しました"
+    );
 
 
 }
-
-
 
 
 
@@ -517,9 +348,157 @@ alert(
 window.onload=function(){
 
 
-showScreen(
-"titleScreen"
-);
+    showScreen(
+    "titleScreen"
+    );
+
+
+    // =================================
+    // ボタン処理
+    // =================================
+
+    document
+    .querySelectorAll("button")
+    .forEach(button=>{
+
+
+        button.addEventListener(
+        "click",
+        ()=>{
+
+
+            let action =
+            button.dataset.action;
+
+
+
+            switch(action){
+
+
+                case "start":
+
+                    showScreen(
+                    "menuScreen"
+                    );
+
+                    break;
+
+
+
+
+                case "battle":
+
+                    showScreen(
+                    "battleScreen"
+                    );
+
+                    break;
+
+
+
+
+                case "deck":
+
+                    showScreen(
+                    "deckScreen"
+                    );
+
+                    break;
+
+
+
+
+                case "cards":
+
+                    showScreen(
+                    "cardScreen"
+                    );
+
+                    loadCards();
+
+                    break;
+
+
+
+
+                case "setting":
+
+                    showScreen(
+                    "settingScreen"
+                    );
+
+                    break;
+
+
+
+
+                case "menu":
+
+                    showScreen(
+                    "menuScreen"
+                    );
+
+                    break;
+
+
+
+
+                case "title":
+
+                    showScreen(
+                    "titleScreen"
+                    );
+
+                    break;
+
+
+
+
+                case "addDeck":
+
+                    addDeckCard(
+                    currentCard
+                    );
+
+                    break;
+
+
+
+
+                case "endTurn":
+
+                    endTurn();
+
+                    break;
+
+
+
+                case "saveDeck":
+
+                    saveDeck();
+
+                    break;
+
+
+
+                case "exit":
+
+                    alert(
+                    "終了してください"
+                    );
+
+                    break;
+
+
+
+            }
+
+
+
+        });
+
+
+    });
 
 
 };
