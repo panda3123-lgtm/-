@@ -2,61 +2,60 @@
 <html lang="ja">
 
 <head>
+
 <meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
 <title>カードゲーム</title>
+
 <link rel="stylesheet" href="style.css">
+
 </head>
 
 
 <body>
 
+
 <div id="game">
+
+
+<div class="dark-layer"></div>
+
 
 
 <!-- タイトル画面 -->
 
-<section id="titleScreen">
+<section id="titleScreen" class="screen">
 
-<h1>🎴 カードゲーム</h1>
 
-<button onclick="openMenu()">
+<h1 class="logo">
+CARD GAME
+</h1>
+
+
+<p class="subtitle">
+〜 名称未定 〜
+</p>
+
+
+
+<div class="buttons">
+
+
+<button onclick="goMenu()">
 対戦開始
 </button>
 
-<button onclick="openMenu()">
-メニュー
-</button>
 
-
-</section>
-
-
-
-
-<!-- メインメニュー -->
-
-<section id="menuScreen" class="hide">
-
-<h1>カードゲーム</h1>
-
-
-<button onclick="openBattle()">
-対戦する
-</button>
-
-
-<button onclick="openDeckEdit()">
+<button onclick="openDeck()">
 デッキ編集
 </button>
 
 
-<button onclick="openCardList()">
+<button onclick="openCards()">
 カード一覧
-</button>
-
-
-<button onclick="openTutorial()">
-チュートリアル
 </button>
 
 
@@ -65,38 +64,83 @@
 </button>
 
 
-<button onclick="gameEnd()">
+<button onclick="exitGame()">
 終了
 </button>
-
-
-</section>
-
-
-
-
-
-<!-- 共通画面 -->
-
-<section id="subScreen" class="hide">
-
-<h1 id="subTitle"></h1>
-
-<div id="subContent"></div>
-
-
-<button onclick="backMenu()">
-戻る
-</button>
-
-
-</section>
 
 
 </div>
 
 
-<script src="game.js"></script>
+
+<p class="version">
+Ver 1.0.0
+</p>
+
+
+
+</section>
+
+
+
+
+
+<!-- メインメニュー -->
+
+<section id="menuScreen"
+class="screen hidden">
+
+
+<h1 class="logo">
+メインメニュー
+</h1>
+
+
+
+<div class="buttons">
+
+
+<button onclick="goBattle()">
+対戦する
+</button>
+
+
+<button onclick="openDeck()">
+デッキ編集
+</button>
+
+
+<button onclick="openCards()">
+カード一覧
+</button>
+
+
+<button onclick="openSetting()">
+設定
+</button>
+
+
+</div>
+
+
+
+<button class="back"
+onclick="goTitle()">
+
+戻る
+
+</button>
+
+
+</section>
+
+
+
+</div>
+
+
+<script src="main.js"></script>
+
 
 </body>
 
