@@ -1,207 +1,28 @@
+// =====================
+// 画面管理
+// =====================
 
 
-let allCards = [];
+function hideAll(){
 
-let deck = [];
+document.getElementById("titleScreen").classList.add("hide");
 
-let hand = [];
+document.getElementById("menuScreen").classList.add("hide");
 
-let field = [];
-
-let grave = [];
-
-let playerLP = 8000;
-
-let cost = 1;
-
-let turn = 1;
-
-
-
-// cards.json読み込み
-
-fetch("cards.json")
-
-.then(response => response.json())
-
-.then(data => {
-
-
-    allCards = data;
-
-
-    startGame();
-
-
-});
-
-
-
-
-// ゲーム開始
-
-function startGame(){
-
-
-    deck = [...allCards];
-
-
-    shuffle(deck);
-
-
-
-    // 初期手札5枚
-
-    for(let i = 0; i < 5; i++){
-
-        draw();
-
-    }
-
-
-    update();
-
+document.getElementById("subScreen").classList.add("hide");
 
 }
 
 
 
 
-// シャッフル
 
-function shuffle(array){
+function openMenu(){
 
+hideAll();
 
-    for(let i=array.length-1;i>0;i--){
-
-
-        let j=Math.floor(Math.random()*(i+1));
-
-
-        [array[i],array[j]]=[array[j],array[i]];
-
-
-    }
-
-}
-
-
-
-
-// ドロー
-
-function draw(){
-
-
-    if(deck.length===0){
-
-        alert("デッキ切れ！敗北");
-
-        return;
-
-    }
-
-
-    hand.push(deck.shift());
-
-
-}
-
-
-
-
-// 手札表示
-
-function update(){
-
-
-    document.getElementById("playerLP").innerText = playerLP;
-
-    document.getElementById("cost").innerText = cost;
-
-
-
-    let handDiv=document.getElementById("hand");
-
-    handDiv.innerHTML="";
-
-
-
-    hand.forEach((card,index)=>{
-
-
-        let div=document.createElement("div");
-
-
-        div.className="card";
-
-
-        div.innerHTML=`
-
-        <b>${card.name}</b>
-
-        <br>
-
-        コスト:${card.cost}
-
-        <br>
-
-        ATK:${card.atk}
-
-        `;
-
-
-
-        div.onclick=()=>playCard(index);
-
-
-
-        handDiv.appendChild(div);
-
-
-
-    });
-
-
-
-    let fieldDiv=document.getElementById("player-field");
-
-    fieldDiv.innerHTML="自分モンスターエリア";
-
-
-
-    field.forEach(card=>{
-
-
-        let div=document.createElement("div");
-
-
-        div.className="card";
-
-
-        div.innerHTML=`
-
-        <b>${card.name}</b>
-
-        <br>
-
-        ATK:${card.atk}
-
-        `;
-
-
-
-        div.onclick=()=>attack(card);
-
-
-
-        fieldDiv.appendChild(div);
-
-
-
-    });
-
-
+document.getElementById("menuScreen")
+.classList.remove("hide");
 
 }
 
@@ -209,59 +30,12 @@ function update(){
 
 
 
-// カード使用
+function backMenu(){
 
-function playCard(index){
+hideAll();
 
-
-    let card=hand[index];
-
-
-
-    if(card.cost > cost){
-
-
-        alert("コスト不足");
-
-        return;
-
-
-    }
-
-
-
-    cost -= card.cost;
-
-
-
-    hand.splice(index,1);
-
-
-
-    if(card.type==="monster"){
-
-
-        field.push(card);
-
-
-    }
-
-
-    else{
-
-
-        alert(card.name+"を発動しました");
-
-
-        grave.push(card);
-
-
-    }
-
-
-
-    update();
-
+document.getElementById("menuScreen")
+.classList.remove("hide");
 
 }
 
@@ -269,26 +43,21 @@ function playCard(index){
 
 
 
-// 攻撃
+function showSub(title,text){
 
-function attack(card){
-
-
-    let damage = card.atk;
+hideAll();
 
 
-    alert(
+document.getElementById("subScreen")
+.classList.remove("hide");
 
-    card.name+
 
-    "で攻撃！\n"+
+document.getElementById("subTitle")
+.innerHTML=title;
 
-    damage+
 
-    "ダメージ"
-
-    );
-
+document.getElementById("subContent")
+.innerHTML=text;
 
 }
 
@@ -296,37 +65,167 @@ function attack(card){
 
 
 
-// ターン終了
-
-function endTurn(){
-
-
-    turn++;
+// =====================
+// 各画面
+// =====================
 
 
 
-    // コスト回復
+function openBattle(){
 
-    cost += 2;
+showSub(
 
+"対戦",
 
-    if(cost>10){
+`
+<h2>対戦準備中</h2>
 
-        cost=10;
+<p>
+ここに対戦画面を追加します。
+</p>
 
-    }
+`
 
-
-
-    // ドロー
-
-    draw();
-
-
-
-    update();
-
+);
 
 }
 
-alert(allCards.length);
+
+
+
+
+function openDeckEdit(){
+
+showSub(
+
+"デッキ編集",
+
+`
+
+<p>
+デッキ名：
+未設定
+</p>
+
+
+<p>
+現在：
+0 / 60枚
+</p>
+
+
+<button>
+カード追加
+</button>
+
+
+<button>
+保存
+</button>
+
+`
+
+);
+
+}
+
+
+
+
+
+function openCardList(){
+
+showSub(
+
+"カード一覧",
+
+`
+
+<div class="card">
+
+<h3>カード</h3>
+
+<p>
+データ読み込み予定
+</p>
+
+</div>
+
+`
+
+);
+
+}
+
+
+
+
+
+function openTutorial(){
+
+showSub(
+
+"チュートリアル",
+
+`
+
+<h2>
+基本ルール
+</h2>
+
+
+<p>
+相手LPを0にすると勝利します。
+</p>
+
+
+<p>
+カードを使用するにはコストが必要です。
+</p>
+
+
+`
+
+);
+
+}
+
+
+
+
+
+function openSetting(){
+
+showSub(
+
+"設定",
+
+`
+
+<p>
+音量設定
+</p>
+
+<p>
+操作設定
+</p>
+
+`
+
+);
+
+}
+
+
+
+
+
+function gameEnd(){
+
+alert(
+
+"ゲームを終了します"
+
+);
+
+}
