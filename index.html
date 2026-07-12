@@ -1,241 +1,103 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>オリジナールカードゲーム</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>カードゲーム</title>
+<link rel="stylesheet" href="style.css">
 </head>
+
+
 <body>
-
-<!-- タイトル -->
-<div id="titleScreen" class="screen active">
-
-    <h1>オリジナールカードゲーム</h1>
-
-    <div class="menu">
-
-        <button id="startButton">
-            スタート
-        </button>
-
-        <button id="settingButton">
-            設定
-        </button>
-
-        <button id="creditButton">
-            クレジット
-        </button>
-
-    </div>
-
-</div>
-
-<!-- ホーム -->
-<div id="homeScreen" class="screen">
-
-    <h2>ホーム</h2>
-
-    <div class="menu">
-
-        <button id="battleButton">
-            CPU対戦
-        </button>
-
-        <button id="friendButton">
-            フレンド対戦（準備中）
-        </button>
-
-        <button id="onlineButton">
-            オンライン対戦（準備中）
-        </button>
-
-        <button id="deckButton">
-            デッキ編集
-        </button>
-
-        <button id="collectionButton">
-            カード図鑑
-        </button>
-
-        <button id="homeSettingButton">
-            設定
-        </button>
-
-        <button id="homeCreditButton">
-            クレジット
-        </button>
-
-    </div>
-
-</div>
-
-<!-- 対戦画面 -->
-<div id="battleScreen" class="screen">
 
 <div id="game">
 
-<div class="status enemy">
 
-<span id="enemyLP">
-相手 LP：8000
-</span>
+<!-- タイトル画面 -->
 
-<span id="enemyCost">
-コスト：2 / 2
-</span>
+<section id="titleScreen">
 
-</div>
+<h1>🎴 カードゲーム</h1>
 
-<div class="field enemyMonster">
-
-相手モンスターエリア
-
-</div>
-
-<div class="field enemySpell">
-
-相手魔法・トラップエリア
-
-</div>
-
-<div class="field playerSpell">
-
-自分魔法・トラップエリア
-
-</div>
-
-<div class="field playerMonster">
-
-自分モンスターエリア
-
-</div>
-
-<div id="hand" class="hand">
-
-</div>
-
-<div class="status player">
-
-<span id="playerLP">
-LP：8000
-</span>
-
-<span id="playerCost">
-コスト：1 / 1
-</span>
-
-</div>
-
-<div class="battleMenu">
-
-<button id="drawButton">
-ドロー
+<button onclick="openMenu()">
+対戦開始
 </button>
 
-<button id="endTurnButton">
-ターン終了
+<button onclick="openMenu()">
+メニュー
 </button>
 
-<button class="backHome">
-ホームへ戻る
+
+</section>
+
+
+
+
+<!-- メインメニュー -->
+
+<section id="menuScreen" class="hide">
+
+<h1>カードゲーム</h1>
+
+
+<button onclick="openBattle()">
+対戦する
 </button>
 
-</div>
 
-</div>
-
-</div>
-
-<!-- デッキ編集 -->
-<div id="deckScreen" class="screen">
-
-<h2>デッキ編集</h2>
-
-<p>
-デッキ枚数
-<span id="deckCount">
-35 / 60
-</span>
-</p>
-
-<div id="deckArea">
-
-ここにカード一覧が表示されます
-
-</div>
-
-<button class="backHome">
-ホームへ戻る
+<button onclick="openDeckEdit()">
+デッキ編集
 </button>
 
-</div>
 
-<!-- カード図鑑 -->
-<div id="collectionScreen" class="screen">
-
-<h2>カード図鑑</h2>
-
-<input
-type="text"
-id="searchBox"
-placeholder="カード名検索">
-
-<div id="collectionArea">
-
+<button onclick="openCardList()">
 カード一覧
-
-</div>
-
-<button class="backHome">
-ホームへ戻る
 </button>
 
-</div>
 
-<!-- 設定 -->
-<div id="settingScreen" class="screen">
-
-<h2>設定</h2>
-
-<p>今後実装予定</p>
-
-<button class="backHome">
-ホームへ戻る
+<button onclick="openTutorial()">
+チュートリアル
 </button>
 
-</div>
 
-<!-- クレジット -->
-<div id="creditScreen" class="screen">
-
-<h2>クレジット</h2>
-
-<p>
-
-制作
-
-<br><br>
-
-チルノーク（企画担当）
-
-<br>
-
-＆
-
-<br>
-
-ChatGPT
-
-</p>
-
-<button class="backHome">
-ホームへ戻る
+<button onclick="openSetting()">
+設定
 </button>
 
+
+<button onclick="gameEnd()">
+終了
+</button>
+
+
+</section>
+
+
+
+
+
+<!-- 共通画面 -->
+
+<section id="subScreen" class="hide">
+
+<h1 id="subTitle"></h1>
+
+<div id="subContent"></div>
+
+
+<button onclick="backMenu()">
+戻る
+</button>
+
+
+</section>
+
+
 </div>
 
-<script src="script.js"></script>
+
+<script src="game.js"></script>
 
 </body>
+
 </html>
